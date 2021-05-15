@@ -2,7 +2,7 @@ const statusDisplay = document.querySelector('.game-status');
 
 let gameActive = true;
 let currentPlayer = 'X';
-const gameState = ['', '', '', '', '', '', '', '', ''];
+let gameState = ['', '', '', '', '', '', '', '', ''];
 let winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -14,12 +14,16 @@ let winningConditions = [
     [2, 5, 8]
 ];
 
-const winningMess = `Congratulations! ${currentPlayer} won!`;
+const winningMess = () => `Congratulations! ${currentPlayer} won!`;
 const drawMess = `It's a tie!`;
-const currPlayerTurn = `It's ${currentPlayer} turn.`;
+const currPlayerTurn = () => `It's ${currentPlayer} turn.`;
 
-statusDisplay.innerHTML = currPlayerTurn;
+statusDisplay.innerHTML = currPlayerTurn();
 
+const playerChange = () => {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    statusDisplay.innerHTML = currPlayerTurn();
+};
 
 const cellPlayed = (clickedCell, cellIndex) => {
     // Ustawiam gdzie w gameState ma się pojawić symbol obecnego gracza
@@ -28,10 +32,6 @@ const cellPlayed = (clickedCell, cellIndex) => {
     clickedCell.innerHTML = currentPlayer;
 };
 
-const playerChange = () => {
-    statusDisplay.textContent = currPlayerTurn;
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-};
 
 const resultValid = () => {
     let roundWon = false;
@@ -53,14 +53,14 @@ const resultValid = () => {
     console.log(gameState)
     // jeśli roundWon = true to wyświetla komunikat o zwycięzcy i zwraca funkcje
     if (roundWon) {
-        statusDisplay.textContent = winningMess;
+        statusDisplay.innerHTML = winningMess();
         gameActive = false;
         return;
     };
 
     let roundDraw = !gameState.includes('');
     if (roundDraw) {
-        statusDisplay.textContent = drawMess;
+        statusDisplay.innerHTML = drawMess;
         gameActive = false;
         return;
     }
@@ -83,8 +83,8 @@ const cellClick = e => {
 const restartGame = () => {
     gameActive = true;
     currentPlayer = 'X';
-    const gameState = ['', '', '', '', '', '', '', '', ''];
-    statusDisplay.textContent = currPlayerTurn;
+    gameState = ['', '', '', '', '', '', '', '', ''];
+    statusDisplay.innerHTML = currPlayerTurn();
     document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = '');
 };
 

@@ -39,6 +39,11 @@ body {
   cursor: pointer;
 }
 
+.game-status {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 .restart-btn {
   position: absolute;
   left: 50%;

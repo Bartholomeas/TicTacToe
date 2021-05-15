@@ -30,11 +30,10 @@ body {
     cursor: pointer;
 }
 
-// .game-status {
-//     position: absolute;
-//     left: 50%;
-//     transform: translate(-50%);
-// }
+.game-status {
+    text-align: center;
+    margin-bottom: 2rem;
+}
 
 .restart-btn {
     position: absolute;
